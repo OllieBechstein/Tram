@@ -1,0 +1,11 @@
+Model Information:
+* title:	Low Poly Tram
+* source:	https://sketchfab.com/3d-models/low-poly-tram-2012f3a22b994ef4b98430d5ed8b310e
+* author:	Sergi Trojanski (https://sketchfab.com/nathramn)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Low Poly Tram" (https://sketchfab.com/3d-models/low-poly-tram-2012f3a22b994ef4b98430d5ed8b310e) by Sergi Trojanski (https://sketchfab.com/nathramn) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
