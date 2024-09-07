@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cqkeq0dk6bsbh"
-path.s3tc="res://.godot/imported/Bumpers_baseColor.png-881e61d560f6e3bac04d375b4fb7d513.s3tc.ctex"
+uid="uid://cse2hoxx2yv8e"
+path.s3tc="res://.godot/imported/Running Gear_0.png-ac27c0aa14245b4c2ecc375ced714b43.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "6ca09eadb3e0442cf4184f6d20b6d9cf"
+}
 
 [deps]
 
-source_file="res://Tram/textures/Bumpers_baseColor.png"
-dest_files=["res://.godot/imported/Bumpers_baseColor.png-881e61d560f6e3bac04d375b4fb7d513.s3tc.ctex"]
+source_file="res://Tram/Running Gear/Running Gear_0.png"
+dest_files=["res://.godot/imported/Running Gear_0.png-ac27c0aa14245b4c2ecc375ced714b43.s3tc.ctex"]
 
 [params]
 

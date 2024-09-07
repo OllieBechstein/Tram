@@ -1,16 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://b31vs7l8iw76q"]
+[gd_scene load_steps=7 format=3 uid="uid://b31vs7l8iw76q"]
 
-[ext_resource type="PackedScene" uid="uid://bd132f0skktd5" path="res://Tram/scene.gltf" id="1_ksqqe"]
 [ext_resource type="Script" path="res://path_follow_3d.gd" id="1_tmphk"]
+[ext_resource type="PackedScene" uid="uid://d2ra1rkikvu3a" path="res://Tram/Running Gear/Running Gear.gltf" id="2_efqbq"]
+[ext_resource type="PackedScene" uid="uid://b06yvqaodsxlw" path="res://Tram/Front/Tram Front.gltf" id="3_t5qr0"]
+[ext_resource type="Script" path="res://Tram/Front/tram_front.gd" id="4_vf2hw"]
+[ext_resource type="Script" path="res://path_follow_front_trail.gd" id="5_u8hw4"]
 
 [sub_resource type="Curve3D" id="Curve3D_e2xyt"]
 _data = {
-"points": PackedVector3Array(-87.5, 0, 8.8, 87.5, 0, -8.8, 300, 0, -13, 15, 0, 96, -15, 0, -96, 462, 0, -91, 108, 0, -1, -108, 0, 1, 190, 0, -131, 74, 0, 12, -74, 0, -12, -103, 0, -46, 59, 0, -79, -59, 0, 79, -285, 0, -89, -57, 0, -22, 57, 0, 22, -208, 0, 32, -34, 0, 1, 34, 0, -1, 32, 0, 93, -96.5, 0, 6.7, 96.5, 0, -6.7, 300, 0, -13),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(-154.64, 0, 22.3038, 154.64, 0, -22.3038, 460.378, 0, -0.0919638, -80.1, 0, 3.4, 80.1, 0, -3.4, 1049, 0, -2, 211.1, 0, 287, -211.1, 0, -287, 1221.68, 0, -318.293, 163.7, 0, -62.4, -163.7, 0, 62.4, 343, 0, -345, 74, 0, 12, -74, 0, -12, -165.6, 0, -397.1, 115.9, 0, -147.2, -115.9, 0, 147.2, -501.7, 0, -303.4, -57, 0, -22, 57, 0, 22, -208, 0, 32, -34, 0, 1, 34, 0, -1, 32, 0, 93, -113.006, 0, 11.8954, 113.006, 0, -11.8954, 460.378, 0, -0.0919638),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 8
+point_count = 9
 
 [node name="Main" type="Node3D"]
+
+[node name="blockbench_export2" parent="." instance=ExtResource("3_t5qr0")]
+transform = Transform3D(5.56714, 0, -38.5989, 0, 39, 0, 38.5989, 0, 5.56714, 460.378, 0.2, -0.091967)
+script = ExtResource("4_vf2hw")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_e2xyt")
@@ -42,13 +49,19 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.0692763, 0, -0.997559, 0, 1, 0, 0.997559, 0, 0.0692763, 299.999, 0, -12.9999)
-progress = 1757.09
+transform = Transform3D(0.142747, 0, -0.989716, 0, 1, 0, 0.989716, 0, 0.142747, 460.378, 0, -0.0919638)
 script = ExtResource("1_tmphk")
 
-[node name="Sketchfab_Scene" parent="Path3D/PathFollow3D" instance=ExtResource("1_ksqqe")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+[node name="blockbench_export" parent="Path3D/PathFollow3D" instance=ExtResource("2_efqbq")]
+transform = Transform3D(39, 0, -9.53674e-07, 0, 39, 0, 9.53674e-07, 0, 39, -7.62939e-06, 0.2, 3.05176e-05)
 
-[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D/Sketchfab_Scene"]
-transform = Transform3D(-0.0692663, 0.421619, -0.904166, 0, 0.906308, 0.422618, 0.997637, 0.0292732, -0.0627766, -66.8417, 38, -4.64084)
+[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(0.0692663, -0.421619, 0.904166, 0, 0.906308, 0.422618, -0.997637, -0.0292731, 0.0627766, 66.8417, 38, 4.64081)
 fov = 55.8
+
+[node name="Node3D" type="Node3D" parent="Path3D/PathFollow3D"]
+transform = Transform3D(1, 0, 7.45058e-09, 0, 1, 0, -7.45058e-09, 0, 1, -0.540353, -3, -21.0889)
+
+[node name="PathFollowFrontTrail" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.142753, 0, -0.989758, 0, 1, 0, 0.989758, 0, 0.142753, 460.378, 0, -0.0919638)
+script = ExtResource("5_u8hw4")

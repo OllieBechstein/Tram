@@ -6,7 +6,6 @@ var speed_setting: float = 0
 func _ready():
 	progress = 0 # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_pressed("increase_speed"):
