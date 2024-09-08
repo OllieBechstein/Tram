@@ -7,7 +7,7 @@ func _ready():
 	progress = 0 # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _physics_process(delta):
 	if Input.is_action_pressed("increase_speed"):
 		speed_setting += 1 * delta
 	elif Input.is_action_pressed("decrease_speed"):
@@ -15,5 +15,4 @@ func _process(delta):
 	else:
 		speed_setting -= 0.5 * delta
 	speed_setting = clampf(speed_setting, 0, Max_Speed)
-	print(speed_setting)
 	progress += speed_setting

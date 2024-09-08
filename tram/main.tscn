@@ -1,29 +1,70 @@
-[gd_scene load_steps=7 format=3 uid="uid://b31vs7l8iw76q"]
+[gd_scene load_steps=21 format=3 uid="uid://b31vs7l8iw76q"]
 
-[ext_resource type="Script" path="res://path_follow_3d.gd" id="1_tmphk"]
+[ext_resource type="Script" path="res://path_follow_front.gd" id="1_tmphk"]
+[ext_resource type="Texture2D" uid="uid://dvtlqe5hxk2w3" path="res://cobblestone_2.png" id="1_wg687"]
 [ext_resource type="PackedScene" uid="uid://d2ra1rkikvu3a" path="res://Tram/Running Gear/Running Gear.gltf" id="2_efqbq"]
 [ext_resource type="PackedScene" uid="uid://b06yvqaodsxlw" path="res://Tram/Front/Tram Front.gltf" id="3_t5qr0"]
 [ext_resource type="Script" path="res://Tram/Front/tram_front.gd" id="4_vf2hw"]
-[ext_resource type="Script" path="res://path_follow_front_trail.gd" id="5_u8hw4"]
+[ext_resource type="Script" path="res://path_follow_rear.gd" id="5_u8hw4"]
+[ext_resource type="PackedScene" uid="uid://dmchaetn3oyaj" path="res://Tram/Back/Tram Back.gltf" id="6_gwd3l"]
+[ext_resource type="Script" path="res://Tram/Back/tram_back.gd" id="7_xmjro"]
+[ext_resource type="Script" path="res://path_follow_front_trail.gd" id="8_mvml2"]
+[ext_resource type="PackedScene" uid="uid://celi1nub6ln1l" path="res://Tram/Middle/middle.gltf" id="9_jqedf"]
+[ext_resource type="Script" path="res://camera_root.gd" id="10_t4bx1"]
+[ext_resource type="Texture2D" uid="uid://8vgy5bgk5mny" path="res://grass_3.png" id="11_nw5b1"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_2i077"]
+rayleigh_coefficient = 7.0
+mie_coefficient = 0.107
+turbidity = 0.0
+sun_disk_scale = 0.0
+energy_multiplier = 2.5
+
+[sub_resource type="Sky" id="Sky_wuitr"]
+sky_material = SubResource("PhysicalSkyMaterial_2i077")
+
+[sub_resource type="Environment" id="Environment_q1h77"]
+background_mode = 2
+background_energy_multiplier = 1.43
+sky = SubResource("Sky_wuitr")
+ambient_light_energy = 1.79
+tonemap_mode = 3
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
 
 [sub_resource type="Curve3D" id="Curve3D_e2xyt"]
 _data = {
-"points": PackedVector3Array(-154.64, 0, 22.3038, 154.64, 0, -22.3038, 460.378, 0, -0.0919638, -80.1, 0, 3.4, 80.1, 0, -3.4, 1049, 0, -2, 211.1, 0, 287, -211.1, 0, -287, 1221.68, 0, -318.293, 163.7, 0, -62.4, -163.7, 0, 62.4, 343, 0, -345, 74, 0, 12, -74, 0, -12, -165.6, 0, -397.1, 115.9, 0, -147.2, -115.9, 0, 147.2, -501.7, 0, -303.4, -57, 0, -22, 57, 0, 22, -208, 0, 32, -34, 0, 1, 34, 0, -1, 32, 0, 93, -113.006, 0, 11.8954, 113.006, 0, -11.8954, 460.378, 0, -0.0919638),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(-104.458, 0, -2.06209, 104.458, 0, 2.06209, 1049, 0, -2, 211.1, 0, 287, -211.1, 0, -287, 1221.68, 0, -318.293, 163.7, 0, -62.4, -163.7, 0, 62.4, 343, 0, -345, 74, 0, 12, -74, 0, -12, -165.6, 0, -397.1, 115.9, 0, -147.2, -115.9, 0, 147.2, -501.7, 0, -303.4, -83, 0, -37, 83, 0, 37, -208, 0, 32, -180, 0, 15, 180, 0, -15, 237, 0, 76, -40, 0, -1, 40, 0, 1, 1049, 0, -2),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 9
+point_count = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ajcbr"]
+albedo_texture = ExtResource("1_wg687")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uc0da"]
+albedo_texture = ExtResource("1_wg687")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hxhux"]
+albedo_texture = ExtResource("11_nw5b1")
+uv1_scale = Vector3(200, 200, 200)
+uv1_triplanar_sharpness = 1.10957
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_jrlne"]
+size = Vector2(3000, 3000)
 
 [node name="Main" type="Node3D"]
 
-[node name="blockbench_export2" parent="." instance=ExtResource("3_t5qr0")]
-transform = Transform3D(5.56714, 0, -38.5989, 0, 39, 0, 38.5989, 0, 5.56714, 460.378, 0.2, -0.091967)
-script = ExtResource("4_vf2hw")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_q1h77")
 
 [node name="Path3D" type="Path3D" parent="."]
 curve = SubResource("Curve3D_e2xyt")
 
 [node name="RightRail" type="CSGPolygon3D" parent="Path3D"]
-polygon = PackedVector2Array(3.6, 0, 3.7, 0.2, 4.1, 0.2, 4.2, 0)
+material_override = SubResource("StandardMaterial3D_ajcbr")
+polygon = PackedVector2Array(1.2, 0, 1.2, 0.1, 1.3, 0.1, 1.3, 0)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
@@ -36,7 +77,8 @@ path_u_distance = 1.0
 path_joined = false
 
 [node name="LeftRail" type="CSGPolygon3D" parent="Path3D"]
-polygon = PackedVector2Array(-3.6, 0, -3.7, 0.2, -4.1, 0.2, -4.2, 0)
+material_override = SubResource("StandardMaterial3D_uc0da")
+polygon = PackedVector2Array(-1.2, 0, -1.2, 0.1, -1.3, 0.1, -1.3, 0)
 mode = 2
 path_node = NodePath("..")
 path_interval_type = 0
@@ -48,20 +90,57 @@ path_continuous_u = true
 path_u_distance = 1.0
 path_joined = false
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.142747, 0, -0.989716, 0, 1, 0, 0.989716, 0, 0.142747, 460.378, 0, -0.0919638)
+[node name="PathFollowFront" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(-0.0197361, 0, -0.999761, 0, 1, 0, 0.999761, 0, -0.0197361, 1049, 0, -2)
 script = ExtResource("1_tmphk")
 
-[node name="blockbench_export" parent="Path3D/PathFollow3D" instance=ExtResource("2_efqbq")]
-transform = Transform3D(39, 0, -9.53674e-07, 0, 39, 0, 9.53674e-07, 0, 39, -7.62939e-06, 0.2, 3.05176e-05)
+[node name="FrontGear" parent="Path3D/PathFollowFront" instance=ExtResource("2_efqbq")]
+transform = Transform3D(12, 0, 1.83399e-08, 0, 12, 0, -1.83399e-08, 0, 12, 0, 0.1, 0)
 
-[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollow3D"]
-transform = Transform3D(0.0692663, -0.421619, 0.904166, 0, 0.906308, 0.422618, -0.997637, -0.0292731, 0.0627766, 66.8417, 38, 4.64081)
-fov = 55.8
+[node name="FrontBody" parent="Path3D/PathFollowFront/FrontGear" instance=ExtResource("3_t5qr0")]
+transform = Transform3D(1, 0, -1.86265e-09, 0, 1, 0, 1.86265e-09, 0, 1, 0, 0, 0)
+script = ExtResource("4_vf2hw")
 
-[node name="Node3D" type="Node3D" parent="Path3D/PathFollow3D"]
+[node name="Node3D" type="Node3D" parent="Path3D/PathFollowFront"]
 transform = Transform3D(1, 0, 7.45058e-09, 0, 1, 0, -7.45058e-09, 0, 1, -0.540353, -3, -21.0889)
 
-[node name="PathFollowFrontTrail" type="PathFollow3D" parent="Path3D"]
-transform = Transform3D(0.142753, 0, -0.989758, 0, 1, 0, 0.989758, 0, 0.142753, 460.378, 0, -0.0919638)
+[node name="PathFollowRear" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.0817715, 0, -0.996642, 0, 1, 0, 0.996642, 0, 0.0817715, 1011.58, 0, 0.319405)
+progress = 4082.34
 script = ExtResource("5_u8hw4")
+
+[node name="BackGear" parent="Path3D/PathFollowRear" instance=ExtResource("2_efqbq")]
+transform = Transform3D(12, 0, 1.46719e-07, 0, 12, 0, -1.46719e-07, 0, 12, 0, 0.1, 0)
+
+[node name="BackBody" parent="Path3D/PathFollowRear/BackGear" instance=ExtResource("6_gwd3l")]
+transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, -0.00512821, 0)
+script = ExtResource("7_xmjro")
+
+[node name="PathFollowMiddle" type="PathFollow3D" parent="Path3D"]
+transform = Transform3D(0.0684243, 0, -0.997652, 0, 1, 0, 0.997652, 0, 0.0684243, 1031.52, 0, -1.20601)
+progress = 4102.34
+script = ExtResource("8_mvml2")
+
+[node name="Middle" parent="Path3D/PathFollowMiddle" instance=ExtResource("9_jqedf")]
+transform = Transform3D(12, 0, 7.33596e-08, 0, 12, 0, -7.33596e-08, 0, 12, 0, 1, 0)
+
+[node name="CameraRoot" type="Node3D" parent="Path3D/PathFollowMiddle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("10_t4bx1")
+
+[node name="CameraYaw" type="Node3D" parent="Path3D/PathFollowMiddle/CameraRoot"]
+
+[node name="CameraPitch" type="Node3D" parent="Path3D/PathFollowMiddle/CameraRoot/CameraYaw"]
+
+[node name="Camera3D" type="Camera3D" parent="Path3D/PathFollowMiddle/CameraRoot/CameraYaw/CameraPitch"]
+transform = Transform3D(0.999825, 0.0186034, 0.00164111, -0.0180511, 0.940115, 0.34038, 0.0047894, -0.34035, 0.940287, -0.0361044, 32.6017, 80.4077)
+fov = 31.7
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 418.159, 0, 0)
+material_override = SubResource("StandardMaterial3D_hxhux")
+mesh = SubResource("PlaneMesh_jrlne")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 81.4632, 0)
+light_color = Color(1, 1, 0.788235, 1)
